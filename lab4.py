@@ -5,8 +5,8 @@ from matplotlib.animation import FuncAnimation
 # Parámetros de la simulación
 M, N = 50, 50  # Tamaño del grid
 T = 100        # Tiempo de simulación
-beta = 0.1     # Probabilidad de infección
-gamma = 0.25   # Probabilidad de recuperación
+beta = 0.2     # Probabilidad de infección
+gamma = 0.33   # Probabilidad de recuperación
 rad = 1        # Radio de interacción
 Nexp = 10      # Número de experimentos
 I0 = 2         # Número de infectados iniciales
@@ -127,6 +127,11 @@ def mostrar_menu():
         animar_y_guardar_grid(historial, "simulacion_simple.gif")
     
     elif eleccion == 2:
+        #preguntar por el número de experimentos
+        Nexp = int(input("Introduce el número de experimentos a promediar: "))
+        #preguntar por el número beta y gamma
+        beta = float(input("Introduce el valor de beta (probabilidad de infección): "))
+        gamma = float(input("Introduce el valor de gamma (probabilidad de recuperación): "))
         posiciones_infectadas = [(np.random.randint(0, M), np.random.randint(0, N)) for _ in range(I0)]
         S_prom, I_prom, R_prom, _ = simulacion_promediada_con_SIR_y_grid(M, N, T, posiciones_infectadas, beta, gamma, rad, Nexp)
         graficar_y_guardar_dinamica(S_prom, I_prom, R_prom, "simulacion_promediada_dinamica.png")
